@@ -5,6 +5,7 @@ package ds18b20
 import (
 	"errors"
 	"io/ioutil"
+	"os/exec"
 	"strconv"
 	"strings"
 )
@@ -13,7 +14,7 @@ var ErrReadSensor = errors.New("failed to read sensor temperature")
 
 // Sensors get all connected sensor IDs as array
 func Sensors() ([]string, error) {
-	data, err := ioutil.ReadFile("/sys/bus/w1/devices/w1_bus_master1/w1_master_slaves")
+	data, err := exec.Command("sh", "-c", "cat /sys/bus/w1/devices/w1_bus_master*/w1_master_slaves").Output()
 	if err != nil {
 		return nil, err
 	}
