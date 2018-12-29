@@ -13,6 +13,16 @@ sudo echo dtoverlay=w1-gpio-pullup,gpiopin=4 >> /boot/config.txt
 sudo modprobe w1_gpio && sudo modprobe w1_therm
 ```
 
+To run multiple busses add more `dtoverlay=w1-gpio,gpiopin=x` entries to you /boot/config.txt
+
+Example:
+```
+dtoverlay=w1-gpio,gpiopin=4
+dtoverlay=w1-gpio,gpiopin=23
+```
+
+NOTICE: Depending on you kernel version multiple busses might not be supported.
+
 ### Drivers
 
 1-Wire drivers need to be loaded in order to create the connection between the physical sensor and the rPI.
